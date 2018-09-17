@@ -4,9 +4,9 @@ An example of Api created with Nodejs, Hapi, MongoDB, GraphQl and Swagger
 
 ### TODO
 
-- Add typescript
 - Add Prettier
 - Add TSLint
+- Create Controllers
 - Add GraphQl
 - Add Swager
 

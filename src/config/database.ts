@@ -1,4 +1,4 @@
 // config/database.js
-module.exports = {
+export default {
   url: "mongodb://localhost/hapiGraphApi" // looks like mongodb://<user>:<pass>@mongo.net:27017/myDataBase
 };

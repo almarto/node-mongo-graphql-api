@@ -1,25 +1,39 @@
-const User = require("../models/User");
+import * as Hapi from "hapi";
 
-exports.plugin = {
-  name: "api",
+import { User, IUserModel } from "../models/User";
+import { IRoute } from "../interfaces/IRoute";
+
+interface UserRequest extends Hapi.Request {
+  payload: IUserModel;
+}
+
+const UserRoutes: IRoute = {
+  name: "user_api",
   version: "1.0.0",
-  register: async server => {
+  register: async (server: Hapi.Server) =>
     server.route([
       {
         path: "/users",
         method: "GET",
-        handler: (request, h) => {
-          return User.find();
+        handler: (request: UserRequest, h) => {
+          return User.find({}, err => err && console.log(err));
         }
       },
       {
         path: "/users",
         method: "POST",
-        handler: (request, h) => {
-          const { name, surname, email, mobile, hobbies } = request.payload;
+        handler: (request: UserRequest, h) => {
+          const {
+            firstName,
+            lastName,
+            email,
+            mobile,
+            hobbies
+          } = request.payload;
+
           const user = new User({
-            name,
-            surname,
+            firstName,
+            lastName,
             email,
             mobile,
             hobbies
@@ -31,14 +45,14 @@ exports.plugin = {
       {
         path: "/users/{userId}",
         method: "GET",
-        handler: (request, h) => {
+        handler: (request: UserRequest, h) => {
           return User.findById(request.params.userId);
         }
       },
       {
         path: "/users/{userId}",
         method: "PUT",
-        handler: (request, h) => {
+        handler: (request: UserRequest, h) => {
           return User.findByIdAndUpdate(
             request.params.userId,
             { ...request.payload },
@@ -49,10 +63,11 @@ exports.plugin = {
       {
         path: "/users/{userId}",
         method: "DELETE",
-        handler: (request, h) => {
+        handler: (request: UserRequest, h) => {
           return User.findByIdAndDelete(request.params.userId);
         }
       }
-    ]);
-  }
+    ])
 };
+
+export default UserRoutes;
