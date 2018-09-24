@@ -17,7 +17,7 @@ const UserRoutes: IRoute = {
         method: "GET",
         handler: (request: UserRequest, h) => {
           return User.find({}, err => err && console.log(err));
-        }
+        },
       },
       {
         path: "/users",
@@ -28,7 +28,7 @@ const UserRoutes: IRoute = {
             lastName,
             email,
             mobile,
-            hobbies
+            hobbies,
           } = request.payload;
 
           const user = new User({
@@ -36,18 +36,18 @@ const UserRoutes: IRoute = {
             lastName,
             email,
             mobile,
-            hobbies
+            hobbies,
           });
 
           return user.save();
-        }
+        },
       },
       {
         path: "/users/{userId}",
         method: "GET",
         handler: (request: UserRequest, h) => {
           return User.findById(request.params.userId);
-        }
+        },
       },
       {
         path: "/users/{userId}",
@@ -56,18 +56,18 @@ const UserRoutes: IRoute = {
           return User.findByIdAndUpdate(
             request.params.userId,
             { ...request.payload },
-            { new: true }
+            { new: true },
           );
-        }
+        },
       },
       {
         path: "/users/{userId}",
         method: "DELETE",
         handler: (request: UserRequest, h) => {
           return User.findByIdAndDelete(request.params.userId);
-        }
-      }
-    ])
+        },
+      },
+    ]),
 };
 
 export default UserRoutes;

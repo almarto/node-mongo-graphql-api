@@ -11,7 +11,8 @@
     "docker:logs": "docker-compose logs",
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up -d",
-    "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans"
+    "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans",
+    "format:prettier": "./node_modules/.bin/prettier  --trailing-comma all --write 'src/**/*.ts'"
   },
   "dependencies": {
     "hapi": "^17.5.4",
@@ -31,7 +32,12 @@
   "devDependencies": {
     "@types/hapi": "^17.0.19",
     "@types/mongoose": "^5.2.15",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.14.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
-  }
+  },
+  "pre-commit": [
+    "format:prettier"
+  ]
 }

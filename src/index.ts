@@ -10,7 +10,7 @@ class Server {
   constructor() {
     this._instance = new Hapi.Server({
       host: "localhost",
-      port: 3000
+      port: 3000,
     });
   }
 
@@ -18,12 +18,12 @@ class Server {
     try {
       mongoose.connect(dbConfig.url);
       mongoose.connection.once("open", () =>
-        console.log("connected to database")
+        console.log("connected to database"),
       );
 
       this._instance = new Hapi.Server({
         host: "localhost",
-        port: 3000
+        port: 3000,
       });
 
       await Router.loadRoutes(this._instance);

@@ -8,8 +8,8 @@ export default class Router {
     await server.register(ApplicationRoutes);
     await server.register(UserRoutes, {
       routes: {
-        prefix: "/api/v1"
-      }
+        prefix: "/api/v1",
+      },
     });
   }
 }
