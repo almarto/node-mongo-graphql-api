@@ -12,6 +12,7 @@
     "docker:ps": "docker-compose ps",
     "docker:start": "docker-compose up -d",
     "docker:stop": "docker-compose -f docker-compose.yml down -v --remove-orphans",
+    "format:lint": "tslint -c tslint.json -p tsconfig.json --fix 'src/**/*.ts'",
     "format:prettier": "./node_modules/.bin/prettier  --trailing-comma all --write 'src/**/*.ts'"
   },
   "dependencies": {
@@ -35,9 +36,14 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.14.3",
     "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.0.3"
   },
   "pre-commit": [
+    "format:lint",
     "format:prettier"
   ]
 }
