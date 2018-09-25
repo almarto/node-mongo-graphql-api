@@ -6,34 +6,48 @@ import { UserController } from "../controllers/user.controller";
 const UserRoutes: IRoute = {
   name: "user_api",
   version: "1.0.0",
-  register: async (server: Hapi.Server) =>
-    server.route([
+  register: async (server: Hapi.Server) => {
+    await server.route([
       {
         path: "/users",
         method: "GET",
-        handler: UserController.list
+        options: {
+          handler: UserController.list,
+          description: "Get Users",
+          notes: "Returns a list with all the users availables in the system",
+          tags: ["api", "v1", "users"]
+        }
       },
       {
         path: "/users",
         method: "POST",
-        handler: UserController.create
+        options: {
+          handler: UserController.create
+        }
       },
       {
         path: "/users/{userId}",
         method: "GET",
-        handler: UserController.get
+        options: {
+          handler: UserController.get
+        }
       },
       {
         path: "/users/{userId}",
         method: "PUT",
-        handler: UserController.update
+        options: {
+          handler: UserController.update
+        }
       },
       {
         path: "/users/{userId}",
         method: "DELETE",
-        handler: UserController.remove
+        options: {
+          handler: UserController.remove
+        }
       }
-    ])
+    ]);
+  }
 };
 
 export default UserRoutes;

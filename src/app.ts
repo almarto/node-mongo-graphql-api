@@ -5,6 +5,7 @@ import { ApolloServer } from "apollo-server-hapi";
 import Router from "./routes";
 import dbConfig from "./config/database";
 import AppGraphqlSchema from "./graphql/schema";
+import Swagger from "./swagger";
 
 class Server {
   private _instance: Hapi.Server;
@@ -39,6 +40,7 @@ class Server {
       await server.installSubscriptionHandlers(this._instance.listener);
 
       await Router.loadRoutes(this._instance);
+      await Swagger.registerSwagger(this._instance);
 
       await this._instance.start();
 

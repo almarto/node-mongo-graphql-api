@@ -1,4 +1,4 @@
-import Hapi from "hapi";
+import * as Hapi from "hapi";
 
 import { User, UserRequest } from "../models/User.model";
 

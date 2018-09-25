@@ -1,5 +1,5 @@
 import { Document, Schema, Model, model } from "mongoose";
-import Hapi from "hapi";
+import * as Hapi from "hapi";
 
 interface IUser {
   firstName: string;
