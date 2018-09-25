@@ -1,4 +1,5 @@
 import { Document, Schema, Model, model } from "mongoose";
+import Hapi from "hapi";
 
 interface IUser {
   firstName: string;
@@ -30,6 +31,10 @@ UserSchema.pre("save", next => {
 });
 
 UserSchema.methods.fullName = (): string =>
-  this.firstName.trim() + " " + this.lastName.trim();
+  `${this.firstName.trim()} ${this.lastName.trim()}`;
 
 export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);
+
+export interface UserRequest extends Hapi.Request {
+  payload: IUserModel;
+}
