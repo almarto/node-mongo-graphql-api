@@ -2,7 +2,7 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLList,
-  GraphQLString,
+  GraphQLString
 } from "graphql";
 
 import { UserType } from "./UserType";
@@ -17,16 +17,16 @@ const RootQuery = new GraphQLObjectType({
       resolve: async (parent, args) => {
         const data = await GraphQLUserController.getById(args.id);
         return data.user;
-      },
+      }
     },
     users: {
       type: new GraphQLList(UserType),
       resolve: async () => {
         const data = await GraphQLUserController.getAll();
         return data.users;
-      },
-    },
-  },
+      }
+    }
+  }
 });
 
 const AppGraphqlSchema = new GraphQLSchema({ query: RootQuery });

@@ -2,7 +2,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
-  GraphQLList,
+  GraphQLList
 } from "graphql";
 
 export const UserType = new GraphQLObjectType({
@@ -13,6 +13,6 @@ export const UserType = new GraphQLObjectType({
     lastName: { type: GraphQLString },
     email: { type: GraphQLString },
     mobile: { type: GraphQLInt },
-    hobbies: { type: new GraphQLList(GraphQLString) },
-  }),
+    hobbies: { type: new GraphQLList(GraphQLString) }
+  })
 });

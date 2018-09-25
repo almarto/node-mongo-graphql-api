@@ -12,7 +12,7 @@ class Server {
   constructor() {
     this._instance = new Hapi.Server({
       host: "localhost",
-      port: 3000,
+      port: 3000
     });
   }
 
@@ -20,21 +20,21 @@ class Server {
     try {
       mongoose.connect(
         dbConfig.url,
-        { useNewUrlParser: true },
+        { useNewUrlParser: true }
       );
       mongoose.connection.once("open", () =>
-        console.log("connected to database"),
+        console.log("connected to database")
       );
 
       const server = new ApolloServer({ schema: AppGraphqlSchema });
 
       this._instance = new Hapi.Server({
         host: "localhost",
-        port: 3000,
+        port: 3000
       });
 
       await server.applyMiddleware({
-        app: this._instance,
+        app: this._instance
       });
       await server.installSubscriptionHandlers(this._instance.listener);
 
@@ -46,7 +46,7 @@ class Server {
         `🚀 Server - Up and running!`,
         `Apollo server ready at http://localhost:${this._instance.info.port}${
           server.graphqlPath
-        }`,
+        }`
       );
 
       return this._instance;
