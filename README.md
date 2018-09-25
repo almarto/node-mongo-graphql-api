@@ -4,7 +4,6 @@ An example of Api created with Nodejs, Hapi, MongoDB, GraphQl and Swagger
 
 ### TODO
 
-- Add GraphQl
 - Add Swager
 
 ## Changelog

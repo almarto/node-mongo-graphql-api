@@ -1,7 +1,7 @@
 import * as Hapi from "hapi";
 
 import { IRoute } from "../interfaces/IRoute";
-import * as UserController from "../controllers/user.controller";
+import { UserController } from "../controllers/user.controller";
 
 const UserRoutes: IRoute = {
   name: "user_api",
@@ -11,29 +11,29 @@ const UserRoutes: IRoute = {
       {
         path: "/users",
         method: "GET",
-        handler: UserController.list,
+        handler: UserController.list
       },
       {
         path: "/users",
         method: "POST",
-        handler: UserController.create,
+        handler: UserController.create
       },
       {
         path: "/users/{userId}",
         method: "GET",
-        handler: UserController.get,
+        handler: UserController.get
       },
       {
         path: "/users/{userId}",
         method: "PUT",
-        handler: UserController.update,
+        handler: UserController.update
       },
       {
         path: "/users/{userId}",
         method: "DELETE",
-        handler: UserController.remove,
-      },
-    ]),
+        handler: UserController.remove
+      }
+    ])
 };
 
 export default UserRoutes;

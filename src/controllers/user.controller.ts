@@ -1,38 +1,38 @@
-import { User, UserRequest } from "../models/User.model";
 import Hapi from "hapi";
+
+import { User, UserRequest } from "../models/User.model";
+
+/************** GraphQL Query Methods **************/
+
+const getAll = async () => {
+  const userList = await User.find({}).exec();
+  return { users: userList, statusCode: 200 };
+};
+
+const getById = async (id: string) => {
+  const user = await User.findById(id).exec();
+  if (!user) return { message: "User not Found", statusCode: 404 };
+
+  return { user, statusCode: 200 };
+};
+
+/************** Hapi Controller Methods **************/
 
 /**
  * List Users
  */
-export const list = (request: UserRequest, h: Hapi.ResponseToolkit) =>
-  User.find({})
-    .exec()
-    .then(users => {
-      return { users, statusCode: 200 };
-    })
-    .catch(err => {
-      return { err, statusCode: 500 };
-    });
+const list = (request: UserRequest, h: Hapi.ResponseToolkit) => getAll();
 
 /**
  * Get User by ID
  */
-export const get = (request: UserRequest, h: Hapi.ResponseToolkit) =>
-  User.findById(request.params.userId)
-    .exec()
-    .then(user => {
-      if (!user) return { message: "User not Found", code: 404 };
-
-      return { user, statusCode: 200 };
-    })
-    .catch(err => {
-      return { err, statusCode: 500 };
-    });
+const get = (request: UserRequest, h: Hapi.ResponseToolkit) =>
+  getById(request.params.userId);
 
 /**
  * POST a User
  */
-export const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
+const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   const { firstName, lastName, email, mobile, hobbies } = request.payload;
 
   const userData = new User({
@@ -40,7 +40,7 @@ export const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
     lastName,
     email,
     mobile,
-    hobbies,
+    hobbies
   });
 
   const createdUser = await User.create(userData);
@@ -48,7 +48,7 @@ export const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   return {
     message: "User created successfully",
     user: createdUser,
-    statusCode: 200,
+    statusCode: 200
   };
 };
 
@@ -63,14 +63,14 @@ export const update = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
 
   return {
     statusCode: 200,
-    message: "User data updated successfully",
+    message: "User data updated successfully"
   };
 };
 
 /**
  * Delete User by ID
  */
-export const remove = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
+const remove = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   const user = await User.findById(request.params.userId);
 
   if (!user) {
@@ -80,4 +80,17 @@ export const remove = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   const removedUser = await user.remove();
 
   return { user: removedUser, statusCode: 200 };
+};
+
+export const GraphQLUserController = {
+  getById,
+  getAll
+};
+
+export const UserController = {
+  list,
+  get,
+  create,
+  update,
+  remove
 };
