@@ -19,7 +19,7 @@ const UserSchema: Schema = new Schema({
   firstName: String,
   lastName: String,
   mobile: Number,
-  hobbies: [String]
+  hobbies: [String],
 });
 
 UserSchema.pre("save", next => {

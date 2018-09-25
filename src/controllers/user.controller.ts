@@ -11,7 +11,7 @@ export const list = (request: UserRequest, h: Hapi.ResponseToolkit) =>
       return { users, statusCode: 200 };
     })
     .catch(err => {
-      return { err: err, statusCode: 500 };
+      return { err, statusCode: 500 };
     });
 
 /**
@@ -26,7 +26,7 @@ export const get = (request: UserRequest, h: Hapi.ResponseToolkit) =>
       return { user, statusCode: 200 };
     })
     .catch(err => {
-      return { err: err, statusCode: 500 };
+      return { err, statusCode: 500 };
     });
 
 /**
@@ -40,7 +40,7 @@ export const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
     lastName,
     email,
     mobile,
-    hobbies
+    hobbies,
   });
 
   const createdUser = await User.create(userData);
@@ -48,7 +48,7 @@ export const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   return {
     message: "User created successfully",
     user: createdUser,
-    statusCode: 200
+    statusCode: 200,
   };
 };
 
@@ -63,7 +63,7 @@ export const update = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
 
   return {
     statusCode: 200,
-    message: "User data updated successfully"
+    message: "User data updated successfully",
   };
 };
 

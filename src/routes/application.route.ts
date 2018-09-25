@@ -12,9 +12,9 @@ const ApplicationRoutes: IRoute = {
         method: "GET",
         handler: (request, h) => {
           return "<h1>Welcome to the Hapi API </h1>";
-        }
-      }
-    ])
+        },
+      },
+    ]),
 };
 
 export default ApplicationRoutes;
