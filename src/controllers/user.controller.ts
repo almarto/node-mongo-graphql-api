@@ -40,7 +40,7 @@ const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
     lastName,
     email,
     mobile,
-    hobbies
+    hobbies,
   });
 
   const createdUser = await User.create(userData);
@@ -48,7 +48,7 @@ const create = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
   return {
     message: "User created successfully",
     user: createdUser,
-    statusCode: 200
+    statusCode: 200,
   };
 };
 
@@ -63,7 +63,7 @@ export const update = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
 
   return {
     statusCode: 200,
-    message: "User data updated successfully"
+    message: "User data updated successfully",
   };
 };
 
@@ -84,7 +84,7 @@ const remove = async (request: UserRequest, h: Hapi.ResponseToolkit) => {
 
 export const GraphQLUserController = {
   getById,
-  getAll
+  getAll,
 };
 
 export const UserController = {
@@ -92,5 +92,5 @@ export const UserController = {
   get,
   create,
   update,
-  remove
+  remove,
 };
